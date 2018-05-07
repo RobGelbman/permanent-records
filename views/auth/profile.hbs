@@ -1,0 +1,104 @@
+     <h5>Customer Profile for {{email}}</h5>
+<form action="/profile" method="post" class="form-horizontal form-custom-border ml-0 pl-5 col-sm-4">
+    <fieldset>
+        <!-- Address form -->
+        <!-- full-name input-->
+        <div class="row">
+          <div class="form-group col-sm-5">
+            <label class="col-form-label col-form-label-sm">First Name</label>
+            <input id="first-name" name="firstName" type="text" placeholder="{{name.firstName}}" class="form-control form-control-sm">
+          </div>
+          <div class="form-group col-sm-6">
+            <label class="col-form-label col-form-label-sm">Last Name</label>
+            <input id="last-name" name="lastName" type="text" placeholder="{{name.lastName}}" class="form-control form-control-sm">
+          </div>
+        </div>
+        <!-- address-line1 input-->
+        <div class="row">
+          <div class="form-group col-sm-11">
+            <label class="col-form-label col-form-label-sm">Address Line 1</label>
+            <input id="address-line1" name="addressLine1" type="text" placeholder="{{shippingAddress.address1}}" class="form-control form-control-sm">
+          </div>
+        </div>
+        <!-- address-line2 input-->
+        <div class="form-group row">
+          <div class="col-sm-11">
+            <label class="col-form-label col-form-label-sm">Address Line 2</label>
+            <input id="address-line2" name="addressLine2" type="text" placeholder="{{shippingAddress.address2}}" class="form-control form-control-sm">
+          </div>
+        </div>
+        <!-- city input-->
+        <div class="form-group row">
+          <div class="col-sm-5">
+            <label class="col-form-label col-form-label-sm">City</label>
+                <input id="city" name="city" type="text" placeholder="{{shippingAddress.city}}" class="form-control form-control-sm">
+          </div>
+        <!-- region input-->
+        <div class="col-sm-3">
+            <label class="col-form-label col-form-label-sm">State </label>
+              <select class="form-control form-control-sm" name="state">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AR">AR</option>	
+                <option value="AZ">AZ</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DC">DC</option>
+                <option value="DE">DE</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="IA">IA</option>	
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="MA">MA</option>
+                <option value="MD">MD</option>
+                <option value="ME">ME</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MO">MO</option>	
+                <option value="MS">MS</option>
+                <option value="MT">MT</option>
+                <option value="NC">NC</option>	
+                <option value="NE">NE</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>			
+                <option value="NV">NV</option>
+                <option value="NY">NY</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WI">WI</option>	
+                <option value="WV">WV</option>
+                <option value="WY">WY</option>
+              </select>	
+        </div>
+        <!-- postal-code input-->
+        <div class="col-sm-3">
+            <label class="col-form-label col-form-label-sm">Zip</label>
+            <input id="postal-code" name="zipCode" type="text" placeholder="{{shippingAddress.zipcode}}" class="form-control form-control-sm">
+        </div>
+  </div>
+      <div  class="form-group text-right mr-5 mt-2">
+      <button type="submit" class="btn btn-outline-dark">Update</button>
+
+    </div>  
+    </fieldset>
+</form>

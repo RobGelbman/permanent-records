@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="col-sm-3 mr-0 p-0 text-center">
+    <h2>Log In</h2>
+    <form action="/login" method="post">
+    <div class="form-group text-center">
+      <label class="col-form-label col-form-label-sm" for="email">Email</label>
+      <input class="form-control form-control-sm text-center" type="email" name="email" id="login-email">
+    </div>
+    <div class="form-group text-center mt-2">
+      <label class="col-form-label col-form-label-sm" for="password">Password</label>
+      <input class="form-control form-control-sm text-center" type="password" name="password" id="login-password">
+    </div>
+    {{!-- <div class="form-group text-center">
+      <label class="col-form-label col-form-label-sm" for="confirm-password">Confirm Password</label>
+      <input class="form-control form-control-sm" type="confirm-password" name="confirm-password" id="confirm-password">
+    </div> --}}
+    {{#if message}}
+    <div class="error-message">{{ message }}</div>
+  {{/if}}
+    <div  class="form-group text-center mt-2">
+      <button type="submit" class="btn btn-outline-dark">Log In</button>
+
+    </div>
+    </form>
+  </div>
+</div>
