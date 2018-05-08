@@ -6,7 +6,9 @@ const cdSchema = new Schema({
   inventory: Number,
   price  : Number,
   cost: Number,
-  unitsSold: Number
+  unitsSold: { type: Number, default: 0 }
 });
 
-const cd = mongoose.model('Cd', cdSchema);
+const CD = mongoose.model('CD', cdSchema);
+
+module.exports = CD;

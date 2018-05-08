@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
   secret: "permanent-records-local-strategy-app",
-  cookie: { maxAge: 600000 },
+  cookie: { maxAge: 60000000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
@@ -96,7 +96,7 @@ passport.use(new LocalStrategy({
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Permanent Records';
 
 
 app.use(passport.initialize());

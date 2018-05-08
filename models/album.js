@@ -5,10 +5,13 @@ const albumSchema = new Schema({
   artist : String,
   title: String,
   label  : String,
+  catalogNo: String,
   releaseDate: String,
-  cover: String,
+  albumCover: String,
   trackListing: [],
   genre: String
 });
 
-const album = mongoose.model('Album', albumSchema);
+const Album = mongoose.model('Album', albumSchema);
+
+module.exports = Album;

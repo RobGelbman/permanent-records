@@ -1,0 +1,113 @@
+{{#if select}}
+<div>
+{{#each albums}}
+  <div class="row m-1">
+  <a class="btn btn-primary btn-sm" href="/admin/album-edit/{{this._id}}" role="button">EDIT</a><span>{{this.artist}} - {{this.title}}</span>
+  </div>
+  {{/each}}
+</div>
+{{else}}
+  <form action="/album-update" method="post" enctype="multipart/form-data" class="form-horizontal form-custom-border ml-0 pl-5 col-sm-4">
+    <fieldset>
+        <div class="row">
+          <div class="form-group col-sm-11">
+            <label class="col-form-label col-form-label-sm">Artist</label>
+            <input id="artist" name="artist" type="text" value="{{album.artist}}" class="form-control form-control-sm">
+          </div>
+        </div>
+        <!-- album input-->
+        <div class="form-group row">
+          <div class="col-sm-11">
+            <label class="col-form-label col-form-label-sm">Album Title</label>
+            <input id="album-title" name="albumTitle" type="text" value="{{album.title}}" class="form-control form-control-sm">
+          </div>
+        </div>
+        <!-- label input-->
+        <div class="form-group row">
+          <div class="col-sm-5">
+            <label class="col-form-label col-form-label-sm">Label</label>
+                <input id="label" name="label" type="text" value="{{album.label}}" class="form-control form-control-sm">
+          </div>
+
+        <!-- catalog-number input-->
+        <div class="col-sm-4">
+            <label class="col-form-label col-form-label-sm">Catalog #</label>
+            <input id="catalog-number" name="catalogNumber" type="text" value="{{album.catalogNo}}" class="form-control form-control-sm">
+        </div>
+      </div>
+
+      <!-- genre input-->
+      <div class="form-group row">
+        <div class="col-sm-5">
+            <label class="col-form-label col-form-label-sm">Release Date</label>
+                <input id="date" name="date" type="date" value="{{album.releaseDate}}" class="form-control form-control-sm">
+          </div>
+          <div class="col-sm-4">
+            <label class="col-form-label col-form-label-sm">Genre </label>
+              <select class="form-control form-control-sm" name="genre">
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="r&b">R&B</option>	
+                <option value="country">Country</option>
+                <option value="jazz">Jazz</option>
+                <option value="classical">Classical</option>
+              </select>	
+          </div>
+        </div>
+      <hr>
+      <h5>Album Cover</h5>
+      <div class="form-group">
+        <input type="file" class="form-control-file form-control-file-sm" name='photo' id="albumCover">
+      </div>
+      <hr>
+        <h5>Tracklisting</h5>
+        <div class="col-sm-10">
+    <ol class="list-group input_fields_wrap">
+      {{#each trackList}}
+    <div><li class="form-group-row"><input class="form-control form-control-sm" type="text" value ="{{this}}" name="tracklist[]"></li></div>
+    {{/each}}
+    </ol>
+    <a href="" class="add_field_button">Add another song</a>
+</div>
+      <hr>
+        <h5>Vinyl</h5>
+       <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label col-form-label-sm">Price</label>
+                <input id="vinyl-price" name="vinylPrice" type="text" value="{{VinylInfo.price}}" class="form-control form-control-sm">
+          </div>
+
+          <div class="col-sm-3">
+          <!-- catalog-number input-->
+            <label class="col-form-label col-form-label-sm">Quantity</label>
+              <input id="vinyl-quantity" name="vinylQuantity" type="text" value="{{VinylInfo.quantity}}" class="form-control form-control-sm">
+          </div>
+          <div class="col-sm-4">
+            <label class="col-form-label col-form-label-sm">Format</label><br>
+            <label class="radio-inline"><input id="12inch" type="radio" name="vinylFormat" value="12">12"</label>
+            <label class="radio-inline"><input id="10inch" type="radio" name="vinylFormat"value="10">10"</label>
+            <label class="radio-inline"><input id="7inch" type="radio" name="vinylFormat"value="7">7"</label>
+          </div>
+        </div>
+      <hr>
+      <h5>CD</h5>
+       <div class="form-group row">
+          <div class="col-sm-3">
+            <label class="col-form-label col-form-label-sm">Price</label>
+                <input id="cd-price" name="cdPrice" type="text" value="{{CdInfo.price}}" class="form-control form-control-sm">
+          </div>
+
+        <!-- catalog-number input-->
+        <div class="col-sm-3">
+            <label class="col-form-label col-form-label-sm">Quantity</label>
+            <input id="cd-quantity" name="cdQuantity" type="text" value="{{CdInfo.quantity}}" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div  class="form-group text-center mr-5 mt-2">
+        <input type="hidden" name="album_id" value="{{album._id}}">
+      <button type="submit" class="btn btn-outline-dark">Update</button>
+
+    </div>  
+    </fieldset>
+</form>
+{{/if}}

@@ -11,7 +11,7 @@ const userSchema = new Schema({
   shoppingCart: [],
   role: {
     type: String,
-    enum : ['CUSTOMER', 'OWNER'],
+    enum : ['CUSTOMER', 'ADMIN'],
     default : 'CUSTOMER'
   }
 });
