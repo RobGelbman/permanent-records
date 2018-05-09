@@ -1,19 +1,17 @@
-const express    = require("express");
-const siteRoutes = express.Router();
+const express       = require("express");
+const siteRoutes    = express.Router();
 const passport      = require("passport");
 const mongoose      = require('mongoose');
-var ObjectId = require('mongoose').Types.ObjectId;
-const User        = require("../models/user");
-const Album        = require("../models/album");
-const CD        = require("../models/cd");
-const Vinyl        = require("../models/vinyl");
-const multer = require("multer");
-const path = require('path');
-const upload = multer({
-  dest:path.join( __dirname, '../public/albumArtwork')
- });
- const CdInfo = {};
- const VinylInfo ={};
+var ObjectId        = require('mongoose').Types.ObjectId;
+const User          = require("../models/user");
+const Album         = require("../models/album");
+const CD            = require("../models/cd");
+const Vinyl         = require("../models/vinyl");
+const multer        = require("multer");
+const path          = require('path');
+const upload        = multer({dest:path.join( __dirname, '../public/albumArtwork')});
+const CdInfo = {};
+const VinylInfo ={};
 
 siteRoutes.get("/profile", ensureAuthenticated, (req, res, next) => {
 
@@ -59,7 +57,9 @@ siteRoutes.post('/album-entry', upload.single('photo'), checkRoles("ADMIN"), (re
   newAlbum.releaseDate = req.body.date;
   newAlbum.genre = req.body.genre;
   newAlbum.trackListing = req.body.tracklist;
-  // newAlbum.albumCover = `/albumArtwork/${req.file.filename}`;
+  if (req.file != null){
+    newAlbum.albumCover= `/albumArtwork/${req.file.filename}`
+  }
 
   newAlbum.save((err, album) => {
     if (err) {
@@ -102,26 +102,17 @@ siteRoutes.get('/admin/album-edit', checkRoles("ADMIN"), (req, res) => {
     .catch(error => {
       console.log(error)
     })
-
-
-  
 });
 
 siteRoutes.get('/admin/album-edit/:_id', checkRoles("ADMIN"), (req, res) => {
-  // var CdInfo ={};
   Album.findById(req.params._id)
     .then(album => {
-      // var albumObject = mongoose.types.ObjectId(album._id);
-      
-      // console.log(albumObject._id)
       CD.findOne({albumId: ObjectId(album._id)})
       .then(cd => {
         if (cd != null){
-          // const CdInfo = {};
           CdInfo.price = cd.price;
           CdInfo.quantity = cd.inventory;
         } else {
-          // let CdInfo = {};
           CdInfo.price = 0;
           CdInfo.quantity = 0;
         }
@@ -134,15 +125,12 @@ siteRoutes.get('/admin/album-edit/:_id', checkRoles("ADMIN"), (req, res) => {
       Vinyl.findOne({albumId: ObjectId(album._id)})
       .then(vinyl => {
         if (vinyl != null){
-          // const vinylInfo = {};
           VinylInfo.price = vinyl.price;
           VinylInfo.quantity = vinyl.inventory;
         } else {
-          // let vinylInfo = {};
           VinylInfo.price = 0;
           VinylInfo.quantity = 0;
         }
-
       })
       .catch(error => {
         console.log(error)
@@ -165,9 +153,11 @@ siteRoutes.post('/album-update', upload.single('photo'), checkRoles("ADMIN"), (r
     trackListing: req.body.tracklist,
     genre: req.body.genre
   }
+
   if (req.file != null){
     updateAlbum.albumCover= `/albumArtwork/${req.file.filename}`
   }
+
   Album.findByIdAndUpdate(req.body.album_id, { $set: updateAlbum })
   .then(album => {
     const updateCD = {
@@ -194,39 +184,6 @@ siteRoutes.post('/album-update', upload.single('photo'), checkRoles("ADMIN"), (r
   .catch(error => {
     console.log(error)
   })
-  // newAlbum.save((err, album) => {
-  //   if (err) {
-  //     res.render("admin/album-entry", { message: "Something went wrong" });
-  //   } else {
-  //     newCD = new CD;
-  //     newCD.albumId = album._id;
-  //     console.log(albumID)
-  //     newCD.price = req.body.cdPrice;
-  //     newCD.inventory = req.body.cdQuantity;
-
-  //     newCD.save((err) => {
-  //       if (err) {
-  //         res.render("admin/album-entry", { message: "Something went wrong" });
-  //       } 
-  //     });
-
-  //     newVinyl = new Vinyl;
-  //     newVinyl.albumId = album._id;
-  //     console.log(albumID)
-  //     newVinyl.price = req.body.vinylPrice;
-  //     newVinyl.inventory = req.body.vinylQuantity;
-  //     newVinyl.format = req.body.vinylFormat;
-
-  //     newVinyl.save((err) => {
-  //       if (err) {
-  //         res.render("admin/album-entry", { message: "Something went wrong" });
-  //       } 
-  //     });
-  //   }
-  // });
-
-  // res.render('admin/index', {user: req.user});
-  
 });
 
 function ensureAuthenticated(req, res, next) {
