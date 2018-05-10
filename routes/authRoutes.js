@@ -40,7 +40,7 @@ authRoutes.post("/signup", (req, res, next) => {
       if (err) {
         res.render("auth/signup", { message: "Something went wrong" });
       } else {
-        res.redirect("/login");
+        res.redirect("/");
       }
     });
   });
@@ -67,7 +67,7 @@ authRoutes.post("/login", passport.authenticate("local", {
 /* GET logout page */
 authRoutes.get("/logout", (req, res) => {
   req.logout();
-  res.redirect("/login");
+  res.redirect("/");
 });
 
 module.exports = authRoutes;

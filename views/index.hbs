@@ -1,6 +1,9 @@
-
-<a href="/signup">Signup</a><br>
-<a href="/login">Login</a><br>
-<a href="/logout">Logout</a><br>
-<a href="/profile">Profile</a><br>
+<a href="/logout">Logout</a>
+<a href="/profile">Profile</a>
 <a href="/admin">Admin</a>
+
+<div class="album-container row flex flex-wrap">
+  {{#each albums}}
+    {{>albumCard}}
+  {{/each}}
+</div>
