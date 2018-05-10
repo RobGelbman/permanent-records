@@ -9,15 +9,15 @@
   <body>
     <nav class="navbar fixed-top  justify-content-between navbar-custom p-0 pl-5 pr-5">
           <div class="logoLink">
-            <a class="navbar-brand" href="#"><img src="/images/logo.png" class="navbar-brand nav-logo mr-0"></a>
-            <ul class="nav">
+            <a class="navbar-brand" href="/"><img src="/images/logo.png" class="navbar-brand nav-logo mr-0"></a>
+            {{!-- <ul class="nav">
               <li class="nav-item">
                 <a class="nav-link nav-link-custom" href="#">Vinyl</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link nav-link-custom" href="#">CD</a>
               </li>
-            </ul>
+            </ul> --}}
             </div>
             
           <form class="form-inline nav-search">
@@ -40,11 +40,11 @@
 								 <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="email">Email address</label>
-											 <input type="email" class="form-control text-center" name="email" id="login-email" required>
+											 <input type="email" class="form-control text-center" name="email" placeholder="Email address" id="login-email" required>
 										</div>
 										<div class="form-group">
 											 <label class="sr-only" for="password">Password</label>
-											 <input type="password" class="form-control text-center" name="password" id="login-password" required>
+											 <input type="password" class="form-control text-center" name="password" placeholder="Password" id="login-password" required>
 										</div>
 										<div class="form-group">
 											 <button type="submit" class="btn btn-primary btn-block btn-fb">Sign in</button>

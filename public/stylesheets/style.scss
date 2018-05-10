@@ -7,8 +7,9 @@ body {
   height:100%;
   font: 14px 'Lato', Helvetica, Arial, sans-serif;
   background-color: black;
-  // background: url('/images/johnny-cash.jpg') no-repeat center center fixed;
+  background: url('/images/johnny-cash.jpg') no-repeat center center fixed;
   background-size: auto 100%;
+  background-position: center 80px; 
 }
 
 a {
@@ -140,10 +141,12 @@ align-items: center;
   padding-right: 100px;
 }
 
-.album-card{
-  margin: 0 auto;
+.album-card, .detail-card{
+  display: block;
+  margin: 5 auto;
   background-color:rgba(136, 0, 0, 0.8);
   color: white;
+  border-radius: 10px;
 }
 .album-img{
   width: 90%;
@@ -152,9 +155,31 @@ align-items: center;
 
 .album-container{
   margin: 0 auto;
+  background-color:rgba(0, 0, 0, 0.3);
 }
 
-.album-card{
-  // width: 20%;
-  display: block
+// .album-card{
+//   // width: 20%;
+//   display: block;
+//   margin: 0 auto;
+// }
+
+.album-card:hover{
+  box-shadow: 0px 0px 15px 10px white;
+  color: white;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px black;
+}
+
+.album-card:hover .album-img{
+  box-shadow: 2px 2px 4px black;
+}
+
+.detail-card{
+  // width: 70%;
+  margin: 0 auto;
+}
+.detail-img{
+  width: 50%;
+  margin: 20px;
 }

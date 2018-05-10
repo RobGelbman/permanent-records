@@ -1,0 +1,22 @@
+
+<div class="card detail-card">
+  <div class="row detail-head">
+    <div>
+      <img class="detail-img" src="{{albumCover}}" alt="{{title}}">
+    </div>
+    <div>
+      <h4 class="text-center">ARTIST: {{artist}}</h4>
+      <h4 class="text-center">ALBUM: {{title}}</h4>
+      <h5 class="text-center">LABEL: {{label}}</h5>
+      <h5 class="text-center">CATALOG #: {{catalogNo}}</h5>
+    </div>
+  </div>
+  <div class="tracklisting">
+    <ol>
+    {{#each trackListing}}
+      <li>{{this}}</li>
+      {{/each}}
+    </ol> 
+  </div>
+</div>
+</a>

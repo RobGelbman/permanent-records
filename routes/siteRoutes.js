@@ -9,6 +9,7 @@ const CD            = require("../models/cd");
 const Vinyl         = require("../models/vinyl");
 const multer        = require("multer");
 const path          = require('path');
+const uploadCloud = require('../config/cloudinary.js');
 const upload        = multer({dest:path.join( __dirname, '../public/albumArtwork')});
 const CdInfo = {};
 const VinylInfo ={};
@@ -47,7 +48,7 @@ siteRoutes.get('/admin/album-entry', checkRoles("ADMIN"), (req, res) => {
   res.render('admin/album-entry', {user: req.user});
 });
 
-siteRoutes.post('/album-entry', upload.single('photo'), checkRoles("ADMIN"), (req, res) => {
+siteRoutes.post('/album-entry', uploadCloud.single('photo'), checkRoles("ADMIN"), (req, res) => {
   var albumID;
   newAlbum = new Album;
   newAlbum.artist = req.body.artist;
@@ -142,7 +143,7 @@ siteRoutes.get('/admin/album-edit/:_id', checkRoles("ADMIN"), (req, res) => {
     })  
 });
 
-siteRoutes.post('/album-update', upload.single('photo'), checkRoles("ADMIN"), (req, res) => {
+siteRoutes.post('/album-update', uploadCloud.single('photo'), checkRoles("ADMIN"), (req, res) => {
   const updateAlbum = {
     artist : req.body.artist,
     title: req.body.albumTitle,

@@ -14,6 +14,16 @@ router.get('/', (req, res, next) => {
     })
 });
 
+router.get('/details/:_id', (req, res, next) => {
+  Album.findById(req.params._id)
+  .then(album => {
+    res.render('details', album)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+})
+
 
 router.get('/noAccess', (req, res, next) => {
   res.render('no-access');
