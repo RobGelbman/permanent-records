@@ -204,7 +204,22 @@ siteRoutes.get('/admin/album-edit/:_id', checkRoles("ADMIN"), (req, res) => {
       .catch(error => {
         console.log(error)
       })
-      res.render('admin/album-edit', {user: req.user, edit: true, album, VinylInfo, CdInfo, trackList: album.trackListing});
+
+      if(req.user != null){
+        if(req.user.role === "ADMIN"){
+          console.log(req.user.role)
+          // var loggedIn ={};
+          var loggedIn = {isAdmin: true};
+          
+          loggedIn.email = req.user.email;
+        }else{
+          var loggedIn ={};
+        }
+      }
+      if (req.user != null){
+      loggedIn.email= req.user.email
+      }
+      res.render('admin/album-edit', {user: req.user, edit: true, album, VinylInfo, CdInfo, trackList: album.trackListing, loggedIn});
     })
     .catch(error => {
       console.log(error)
