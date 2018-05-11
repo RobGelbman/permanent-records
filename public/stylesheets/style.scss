@@ -202,6 +202,7 @@ align-items: center;
 .detail-card{
   width: 70%;
   margin: 0 auto;
+  padding-bottom: 50px;
 }
 .detail-img{
   width: 300px;
@@ -214,7 +215,7 @@ align-items: center;
 
 .detail-column{
   padding-right: 50px;
-  border-right: 2px solid white;
+  // border-right: 2px solid white;
 }
 
 .tracklisting-title{
@@ -223,7 +224,7 @@ align-items: center;
 
 .tracklisting{
   padding-left: 50px;
-  // border-left: 1px solid white;
+  border-left: 2px solid white;
 }
 
 .profile{

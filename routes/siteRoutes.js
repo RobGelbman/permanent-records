@@ -254,6 +254,62 @@ siteRoutes.post('/album-update', uploadCloud.single('photo'), checkRoles("ADMIN"
   })
 });
 
+siteRoutes.get('/admin/album-delete', checkRoles("ADMIN"), (req, res) => {
+  Album.find({}).sort({artist: 1, title:1})
+    .then(albums => {
+      if(req.user != null){
+        if(req.user.role === "ADMIN"){
+          console.log(req.user.role)
+          // var loggedIn ={};
+          var loggedIn = {isAdmin: true};
+          
+          loggedIn.email = req.user.email;
+        }else{
+          var loggedIn ={};
+        }
+      }
+      if (req.user != null){
+      loggedIn.email= req.user.email
+      }
+      res.render('admin/album-delete', {user: req.user, select: true, albums, loggedIn});
+    })
+    .catch(error => {
+      console.log(error)
+    })
+});
+
+siteRoutes.get('/admin/album-delete/:_id', checkRoles("ADMIN"), (req, res) => {
+  console.log(req.params)
+  Album.deleteOne({_id: ObjectId(req.params._id)})
+    .then(album => {
+      
+      Album.find({}).sort({artist: 1, title:1})
+    .then(albums => {
+      if(req.user != null){
+        if(req.user.role === "ADMIN"){
+          console.log(req.user.role)
+          // var loggedIn ={};
+          var loggedIn = {isAdmin: true};
+          
+          loggedIn.email = req.user.email;
+        }else{
+          var loggedIn ={};
+        }
+      }
+      if (req.user != null){
+      loggedIn.email= req.user.email
+      }
+      res.render('admin/album-delete', {user: req.user, select: true, albums, loggedIn});
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    })
+    .catch(error => {
+      console.log(error)
+    })  
+});
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

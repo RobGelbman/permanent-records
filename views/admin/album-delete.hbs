@@ -1,0 +1,7 @@
+<div class="profile-page mt-3">
+{{#each albums}}
+  <div class="row m-1 mt-2">
+  <a class="btn btn-primary btn-sm btn-fb" href="/admin/album-delete/{{_id}}" role="button">DELETE</a><span>{{this.artist}} - {{this.title}}</span>
+  </div>
+  {{/each}}
+  </div>

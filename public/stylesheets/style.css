@@ -164,7 +164,8 @@ a {
 
 .detail-card {
   width: 70%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-bottom: 50px; }
 
 .detail-img {
   width: 300px;
@@ -174,14 +175,14 @@ a {
   margin-top: 50px; }
 
 .detail-column {
-  padding-right: 50px;
-  border-right: 2px solid white; }
+  padding-right: 50px; }
 
 .tracklisting-title {
   text-decoration: underline; }
 
 .tracklisting {
-  padding-left: 50px; }
+  padding-left: 50px;
+  border-left: 2px solid white; }
 
 .profile {
   padding: 0;
