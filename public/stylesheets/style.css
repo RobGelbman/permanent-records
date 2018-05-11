@@ -14,7 +14,7 @@ a {
   color: #00B7FF; }
 
 .form-custom-border {
-  border: 1px solid black; }
+  border: 1px solid white; }
 
 .track-group {
   display: inline; }
@@ -83,6 +83,28 @@ a {
 #login-dp .form-group {
   margin-bottom: 10px; }
 
+#logout-dp {
+  min-width: 250px;
+  padding: 14px 14px 0;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-left: -47px;
+  background-color: darkred; }
+
+#logout-dp .help-block {
+  font-size: 12px; }
+
+#logout-dp .bottom {
+  background-color: darkred;
+  border-top: 1px solid #ddd;
+  clear: both;
+  padding: 14px;
+  margin: 0 auto;
+  color: white; }
+
+#logout-dp .form-group {
+  margin-bottom: 10px; }
+
 .signuplink {
   color: black !important; }
 
@@ -141,10 +163,37 @@ a {
   box-shadow: 2px 2px 4px black; }
 
 .detail-card {
+  width: 70%;
   margin: 0 auto; }
 
 .detail-img {
-  width: 50%;
-  margin: 20px; }
+  width: 300px;
+  margin-bottom: 25px; }
+
+.detail-head {
+  margin-top: 50px; }
+
+.detail-column {
+  padding-right: 50px;
+  border-right: 2px solid white; }
+
+.tracklisting-title {
+  text-decoration: underline; }
+
+.tracklisting {
+  padding-left: 50px; }
+
+.profile {
+  padding: 0;
+  width: 60%; }
+
+.profile-page {
+  background-color: rgba(136, 0, 0, 0.8);
+  color: white;
+  margin-top: 100px;
+  padding-bottom: 50px; }
+
+.custom-center {
+  margin-left: 219px; }
 
 /*# sourceMappingURL=style.css.map */

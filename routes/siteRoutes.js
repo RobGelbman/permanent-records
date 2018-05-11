@@ -17,35 +17,89 @@ const VinylInfo ={};
 siteRoutes.get("/profile", ensureAuthenticated, (req, res, next) => {
 
   User.findById(req.user._id, (err, user) => {
-    if (err) { return next(err); }
+    if (err) { return next(err); }if(req.user != null){
+      if(req.user.role === "ADMIN"){
+        console.log(req.user.role)
+        // var loggedIn ={};
+        var loggedIn = {isAdmin: true};
+        
+        loggedIn.email = req.user.email;
+      }else{
+        var loggedIn ={};
+      }
+    }
+    if (req.user != null){
+    loggedIn.email= req.user.email
+    }
     const profileData = {email: user.email};
     profileData.name = {firstName:user.name.firstName, lastName: user.name.lastName};
     profileData.shippingAddress = {address1: user.shippingAddress.address1, address2: user.shippingAddress.address2, city: user.shippingAddress.city, state: user.shippingAddress.state, zipcode: user.shippingAddress.zipcode};
-    res.render('auth/profile', profileData);
+    res.render('auth/profile', {profileData: profileData, loggedIn});
   });
 
 });
 
 /* POST updateProfile page */
 siteRoutes.post("/profile", ensureAuthenticated, (req, res, next) => {
-  const updateData = {};
-  updateData.name = {firstName:req.body.firstName, lastName: req.body.lastName};
-  updateData.shippingAddress = {address1: req.body.addressLine1, address2: req.body.addressLine2, city: req.body.city, state: req.body.state, zipcode: req.body.zipCode};
-  User.findByIdAndUpdate(req.user._id, updateData)
+  const profileData = {};
+  profileData.name = {firstName:req.body.firstName, lastName: req.body.lastName};
+  profileData.shippingAddress = {address1: req.body.addressLine1, address2: req.body.addressLine2, city: req.body.city, state: req.body.state, zipcode: req.body.zipCode};
+  User.findByIdAndUpdate(req.user._id, profileData)
     .then((user) => { 
-      updateData.email = user.email;
-      res.render("auth/profile", updateData) 
+      profileData.email = user.email;
+      if(req.user.role === "ADMIN"){
+        console.log(req.user.role)
+        // var loggedIn ={};
+        var loggedIn = {isAdmin: true};
+        
+        loggedIn.email = req.user.email;
+      }else{
+        var loggedIn ={};
+      }
+    
+    if (req.user != null){
+    loggedIn.email= req.user.email
+    }
+      res.render("auth/profile", {profileData, loggedIn}) 
     })
   .catch((err) => { console.log('An error happened:', err) })
 
 });
 
 siteRoutes.get('/admin', ensureAuthenticated, checkRoles("ADMIN"), (req, res) => {
-  res.render('admin/index', {user: req.user});
+  if(req.user != null){
+    if(req.user.role === "ADMIN"){
+      console.log(req.user.role)
+      // var loggedIn ={};
+      var loggedIn = {isAdmin: true};
+      
+      loggedIn.email = req.user.email;
+    }else{
+      var loggedIn ={};
+    }
+  }
+  if (req.user != null){
+  loggedIn.email= req.user.email
+  }
+  res.render('admin/index', {user: req.user, loggedIn});
 });
 
 siteRoutes.get('/admin/album-entry', checkRoles("ADMIN"), (req, res) => {
-  res.render('admin/album-entry', {user: req.user});
+  if(req.user != null){
+    if(req.user.role === "ADMIN"){
+      console.log(req.user.role)
+      // var loggedIn ={};
+      var loggedIn = {isAdmin: true};
+      
+      loggedIn.email = req.user.email;
+    }else{
+      var loggedIn ={};
+    }
+  }
+  if (req.user != null){
+  loggedIn.email= req.user.email
+  }
+  res.render('admin/album-entry', {user: req.user, loggedIn});
 });
 
 siteRoutes.post('/album-entry', uploadCloud.single('photo'), checkRoles("ADMIN"), (req, res) => {
@@ -59,7 +113,7 @@ siteRoutes.post('/album-entry', uploadCloud.single('photo'), checkRoles("ADMIN")
   newAlbum.genre = req.body.genre;
   newAlbum.trackListing = req.body.tracklist;
   if (req.file != null){
-    newAlbum.albumCover= `/albumArtwork/${req.file.filename}`
+    newAlbum.albumCover= req.file.url;
   }
 
   newAlbum.save((err, album) => {
@@ -98,7 +152,21 @@ siteRoutes.post('/album-entry', uploadCloud.single('photo'), checkRoles("ADMIN")
 siteRoutes.get('/admin/album-edit', checkRoles("ADMIN"), (req, res) => {
   Album.find({}).sort({artist: 1, title:1})
     .then(albums => {
-      res.render('admin/album-edit', {user: req.user, select: true, albums});
+      if(req.user != null){
+        if(req.user.role === "ADMIN"){
+          console.log(req.user.role)
+          // var loggedIn ={};
+          var loggedIn = {isAdmin: true};
+          
+          loggedIn.email = req.user.email;
+        }else{
+          var loggedIn ={};
+        }
+      }
+      if (req.user != null){
+      loggedIn.email= req.user.email
+      }
+      res.render('admin/album-edit', {user: req.user, select: true, albums, loggedIn});
     })
     .catch(error => {
       console.log(error)
@@ -150,13 +218,12 @@ siteRoutes.post('/album-update', uploadCloud.single('photo'), checkRoles("ADMIN"
     label  : req.body.label,
     catalogNo: req.body.catalogNumber,
     releaseDate: req.body.date,
-    albumCover: String,
     trackListing: req.body.tracklist,
     genre: req.body.genre
   }
 
   if (req.file != null){
-    updateAlbum.albumCover= `/albumArtwork/${req.file.filename}`
+    updateAlbum.albumCover= req.file.url;
   }
 
   Album.findByIdAndUpdate(req.body.album_id, { $set: updateAlbum })

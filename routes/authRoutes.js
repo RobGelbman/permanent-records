@@ -67,6 +67,7 @@ authRoutes.post("/login", passport.authenticate("local", {
 /* GET logout page */
 authRoutes.get("/logout", (req, res) => {
   req.logout();
+  req.session.destroy();
   res.redirect("/");
 });
 

@@ -1,22 +1,25 @@
 
 <div class="card detail-card">
-  <div class="row detail-head">
-    <div>
-      <img class="detail-img" src="{{albumCover}}" alt="{{title}}">
+  <div class="row align-center detail-head">
+    <div class="col-2"></div>
+    <div class="column">
+      <div class="detail-column">
+      <img class="detail-img" src="{{album.albumCover}}" alt="{{album.title}}">
+      <h5 class="text-center">{{album.artist}}</h5>
+      <h5 class="text-center">{{album.title}}</h5>
+      <h6 class="text-center">{{album.label}} / {{album.catalogNo}}</h6>
+      {{!-- <h5 class="text-center">{{album.catalogNo}}</h5> --}}
+      </div>
     </div>
-    <div>
-      <h4 class="text-center">ARTIST: {{artist}}</h4>
-      <h4 class="text-center">ALBUM: {{title}}</h4>
-      <h5 class="text-center">LABEL: {{label}}</h5>
-      <h5 class="text-center">CATALOG #: {{catalogNo}}</h5>
-    </div>
-  </div>
-  <div class="tracklisting">
+    <div class="tracklisting">
+      <h5 class="tracklisting-title">TRACKLISTING</h5>
     <ol>
-    {{#each trackListing}}
-      <li>{{this}}</li>
+    {{#each album.trackListing}}
+      <h5><li>{{this}}</li></h5>
       {{/each}}
     </ol> 
   </div>
+  </div>
+  
 </div>
 </a>
